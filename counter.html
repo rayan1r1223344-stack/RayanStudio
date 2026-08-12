@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>عداد الكلمات والحروف | نبض أدوات</title>
+
+<meta name="description" content="عداد كلمات وحروف مجاني وسريع باللغة العربية من نبض أدوات.">
+
+<style>
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:Arial,Tahoma,sans-serif;
+background:#f5f7fb;
+color:#172033;
+}
+
+header{
+background:#fff;
+padding:18px 6%;
+border-bottom:1px solid #e5e8ef;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-size:23px;
+font-weight:bold;
+color:#172033;
+text-decoration:none;
+}
+
+.home{
+text-decoration:none;
+color:#3157d5;
+font-weight:bold;
+}
+
+main{
+max-width:900px;
+margin:auto;
+padding:50px 20px;
+}
+
+.card{
+background:#fff;
+border-radius:20px;
+padding:25px;
+box-shadow:0 10px 30px rgba(0,0,0,.06);
+border:1px solid #e5e8ef;
+}
+
+h1{
+text-align:center;
+margin-top:0;
+font-size:32px;
+}
+
+.intro{
+text-align:center;
+color:#687286;
+line-height:1.8;
+margin-bottom:25px;
+}
+
+textarea{
+width:100%;
+min-height:260px;
+resize:vertical;
+border:1px solid #dfe3eb;
+border-radius:14px;
+padding:16px;
+font-size:18px;
+line-height:1.8;
+outline:none;
+font-family:Arial,Tahoma,sans-serif;
+}
+
+textarea:focus{
+border-color:#3157d5;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+margin-top:18px;
+}
+
+.stat{
+background:#f7f8fc;
+border-radius:14px;
+padding:18px 10px;
+text-align:center;
+}
+
+.stat strong{
+display:block;
+font-size:27px;
+color:#3157d5;
+}
+
+.stat span{
+display:block;
+margin-top:7px;
+color:#687286;
+font-size:14px;
+}
+
+.buttons{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-top:18px;
+}
+
+button{
+border:0;
+border-radius:10px;
+padding:12px 20px;
+background:#3157d5;
+color:white;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
+}
+
+button.secondary{
+background:#edf0f6;
+color:#263247;
+}
+
+.message{
+min-height:22px;
+margin:15px 0 0;
+color:#3157d5;
+font-weight:bold;
+}
+
+footer{
+text-align:center;
+padding:30px;
+color:#687286;
+}
+
+@media(max-width:650px){
+
+header{
+padding:15px 5%;
+}
+
+main{
+padding:35px 15px;
+}
+
+h1{
+font-size:27px;
+}
+
+.stats{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<a class="logo" href="index.html">
+نبض أدوات
+</a>
+
+<a class="home" href="index.html">
+الرئيسية
+</a>
+
+</header>
+
+
+<main>
+
+<div class="card">
+
+<h1>🔢 عداد الكلمات والحروف</h1>
+
+<p class="intro">
+اكتب أو الصق النص في المربع، وستظهر الإحصاءات مباشرة.
+</p>
+
+<textarea id="text" placeholder="اكتب أو الصق النص هنا..."></textarea>
+
+
+<div class="stats">
+
+<div class="stat">
+<strong id="words">0</strong>
+<span>الكلمات</span>
+</div>
+
+<div class="stat">
+<strong id="characters">0</strong>
+<span>الحروف</span>
+</div>
+
+<div class="stat">
+<strong id="noSpaces">0</strong>
+<span>بدون مسافات</span>
+</div>
+
+<div class="stat">
+<strong id="lines">0</strong>
+<span>الأسطر</span>
+</div>
+
+</div>
+
+
+<div class="buttons">
+
+<button id="copy">
+نسخ النص
+</button>
+
+<button id="clear" class="secondary">
+مسح النص
+</button>
+
+</div>
+
+<p class="message" id="message"></p>
+
+</div>
+
+</main>
+
+
+<footer>
+
+© 2026 نبض أدوات — جميع الحقوق محفوظة
+
+</footer>
+
+
+<script>
+
+const text = document.getElementById("text");
+
+const words = document.getElementById("words");
+const characters = document.getElementById("characters");
+const noSpaces = document.getElementById("noSpaces");
+const lines = document.getElementById("lines");
+
+const message = document.getElementById("message");
+
+
+function updateCounter(){
+
+const value = text.value;
+
+characters.textContent = value.length;
+
+noSpaces.textContent =
+value.replace(/\s/g,"").length;
+
+const cleanValue = value.trim();
+
+words.textContent =
+cleanValue ? cleanValue.split(/\s+/).length : 0;
+
+lines.textContent =
+value ? value.split(/\n/).length : 0;
+
+}
+
+
+text.addEventListener("input",updateCounter);
+
+
+document.getElementById("clear").addEventListener("click",function(){
+
+text.value="";
+
+updateCounter();
+
+message.textContent="تم مسح النص.";
+
+});
+
+
+document.getElementById("copy").addEventListener("click",async function(){
+
+if(!text.value){
+
+message.textContent="لا يوجد نص لنسخه.";
+
+return;
+
+}
+
+try{
+
+await navigator.clipboard.writeText(text.value);
+
+message.textContent="تم نسخ النص بنجاح.";
+
+}catch(error){
+
+text.select();
+
+document.execCommand("copy");
+
+message.textContent="تم نسخ النص.";
+
+}
+
+});
+
+
+updateCounter();
+
+</script>
+
+</body>
+</html>
