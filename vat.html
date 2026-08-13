@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>حاسبة ضريبة القيمة المضافة | احسب</title>
+
+<meta name="description" content="حاسبة ضريبة القيمة المضافة المجانية من احسب. احسب قيمة ضريبة القيمة المضافة والسعر شامل الضريبة بسهولة وسرعة.">
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:Arial,Tahoma,sans-serif;
+background:#f5f7fb;
+color:#172033;
+}
+
+header{
+background:#ffffff;
+padding:18px 6%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:1px solid #e5e8ef;
+}
+
+.logo{
+font-size:24px;
+font-weight:bold;
+}
+
+nav a{
+text-decoration:none;
+color:#333;
+font-weight:bold;
+}
+
+.container{
+max-width:700px;
+margin:50px auto;
+padding:20px;
+}
+
+.card{
+background:#ffffff;
+padding:30px;
+border-radius:20px;
+border:1px solid #e5e8ef;
+box-shadow:0 8px 25px rgba(0,0,0,.06);
+}
+
+h1{
+text-align:center;
+margin-top:0;
+font-size:34px;
+}
+
+.intro{
+text-align:center;
+color:#687286;
+line-height:1.8;
+margin-bottom:30px;
+}
+
+label{
+display:block;
+font-weight:bold;
+margin-bottom:8px;
+}
+
+input{
+width:100%;
+padding:14px;
+border:1px solid #d9deea;
+border-radius:10px;
+font-size:17px;
+margin-bottom:20px;
+outline:none;
+}
+
+input:focus{
+border-color:#3157d5;
+}
+
+button{
+width:100%;
+border:0;
+background:#3157d5;
+color:white;
+padding:15px;
+border-radius:10px;
+font-size:17px;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+background:#2649bd;
+}
+
+.result{
+margin-top:25px;
+background:#f0f3ff;
+border-radius:15px;
+padding:20px;
+display:none;
+}
+
+.result div{
+padding:10px 0;
+border-bottom:1px solid #dce2f5;
+font-size:17px;
+}
+
+.result div:last-child{
+border-bottom:0;
+}
+
+.back{
+display:block;
+text-align:center;
+margin-top:25px;
+color:#3157d5;
+text-decoration:none;
+font-weight:bold;
+}
+
+.info{
+margin-top:30px;
+line-height:1.9;
+color:#566176;
+}
+
+footer{
+text-align:center;
+padding:30px;
+color:#687286;
+}
+
+@media(max-width:600px){
+
+.container{
+margin:25px auto;
+}
+
+.card{
+padding:22px;
+}
+
+h1{
+font-size:29px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+احسب
+</div>
+
+<nav>
+<a href="index.html">الرئيسية</a>
+</nav>
+
+</header>
+
+<main class="container">
+
+<div class="card">
+
+<h1>🧾 حاسبة ضريبة القيمة المضافة</h1>
+
+<p class="intro">
+احسب قيمة ضريبة القيمة المضافة والسعر النهائي شامل الضريبة بسهولة وسرعة.
+</p>
+
+<label for="price">
+السعر قبل الضريبة
+</label>
+
+<input
+type="number"
+id="price"
+placeholder="مثال: 100"
+min="0"
+step="0.01"
+>
+
+<label for="tax">
+نسبة الضريبة %
+</label>
+
+<input
+type="number"
+id="tax"
+value="15"
+min="0"
+step="0.01"
+>
+
+<button onclick="calculateVAT()">
+احسب الضريبة
+</button>
+
+<div class="result" id="result">
+
+<div>
+قيمة الضريبة:
+<strong id="taxValue">0</strong>
+</div>
+
+<div>
+السعر شامل الضريبة:
+<strong id="finalPrice">0</strong>
+</div>
+
+</div>
+
+<a class="back" href="index.html">
+← العودة إلى جميع الأدوات
+</a>
+
+<div class="info">
+
+<h2>ما هي ضريبة القيمة المضافة؟</h2>
+
+<p>
+ضريبة القيمة المضافة هي ضريبة تُفرض على السلع والخدمات وفق النسبة المعمول بها في الدولة. تساعد هذه الحاسبة على معرفة قيمة الضريبة والسعر النهائي بعد إضافتها إلى السعر الأصلي.
+</p>
+
+<h2>مثال على حساب ضريبة القيمة المضافة</h2>
+
+<p>
+إذا كان السعر قبل الضريبة 100 ريال ونسبة الضريبة 15%، فإن قيمة الضريبة تكون 15 ريالًا، ويصبح السعر شامل الضريبة 115 ريالًا.
+</p>
+
+<h2>طريقة استخدام الحاسبة</h2>
+
+<p>
+أدخل السعر قبل الضريبة، ثم أدخل نسبة الضريبة. تظهر لك قيمة الضريبة والسعر النهائي شامل الضريبة مباشرة.
+</p>
+
+</div>
+
+</div>
+
+</main>
+
+<footer>
+
+© 2026 احسب — جميع الحقوق محفوظة
+
+</footer>
+
+<script>
+
+function calculateVAT(){
+
+const price = parseFloat(
+document.getElementById("price").value
+);
+
+const tax = parseFloat(
+document.getElementById("tax").value
+);
+
+if(
+isNaN(price) ||
+isNaN(tax) ||
+price < 0 ||
+tax < 0
+){
+
+alert("يرجى إدخال السعر ونسبة الضريبة بشكل صحيح.");
+
+return;
+
+}
+
+const taxValue = price * tax / 100;
+
+const finalPrice = price + taxValue;
+
+document.getElementById("taxValue").textContent =
+taxValue.toFixed(2);
+
+document.getElementById("finalPrice").textContent =
+finalPrice.toFixed(2);
+
+document.getElementById("result").style.display = "block";
+
+}
+
+</script>
+
+</body>
+</html>
