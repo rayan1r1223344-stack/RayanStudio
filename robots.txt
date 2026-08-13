@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rayan1r1223344-stack.github.io/RayanStudio/sitemap.xml
