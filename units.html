@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>محول الوحدات | نبض أدوات</title>
+
+<meta name="description" content="محول وحدات مجاني وسريع من نبض أدوات. حوّل الطول والوزن والحجم ودرجة الحرارة بسهولة من الهاتف أو الكمبيوتر.">
+
+<style>
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:Arial,Tahoma,sans-serif;
+background:#f5f7fb;
+color:#172033;
+}
+
+header{
+background:#fff;
+padding:18px 6%;
+border-bottom:1px solid #e5e8ef;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-size:23px;
+font-weight:bold;
+color:#172033;
+text-decoration:none;
+}
+
+.home{
+text-decoration:none;
+color:#3157d5;
+font-weight:bold;
+}
+
+main{
+max-width:900px;
+margin:auto;
+padding:45px 20px;
+}
+
+.card{
+background:#fff;
+border-radius:20px;
+padding:25px;
+margin-bottom:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.06);
+border:1px solid #e5e8ef;
+}
+
+h1{
+text-align:center;
+font-size:32px;
+margin-top:0;
+}
+
+.intro{
+text-align:center;
+color:#687286;
+line-height:1.8;
+}
+
+.form{
+display:grid;
+gap:15px;
+margin-top:25px;
+}
+
+label{
+font-weight:bold;
+display:block;
+margin-bottom:7px;
+}
+
+input,
+select{
+width:100%;
+padding:14px;
+border:1px solid #dfe3eb;
+border-radius:12px;
+font-size:18px;
+outline:none;
+background:#fff;
+}
+
+input:focus,
+select:focus{
+border-color:#3157d5;
+}
+
+button{
+border:0;
+border-radius:11px;
+padding:13px 20px;
+background:#3157d5;
+color:#fff;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+}
+
+button.secondary{
+background:#edf0f6;
+color:#263247;
+}
+
+.result{
+margin-top:25px;
+padding:22px;
+background:#f7f8fc;
+border-radius:15px;
+text-align:center;
+}
+
+.result strong{
+display:block;
+font-size:30px;
+color:#3157d5;
+margin-top:8px;
+word-break:break-word;
+}
+
+.buttons{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-top:18px;
+}
+
+.message{
+min-height:22px;
+color:#3157d5;
+font-weight:bold;
+margin-top:15px;
+}
+
+footer{
+text-align:center;
+padding:30px;
+color:#687286;
+}
+
+@media(max-width:600px){
+
+header{
+padding:15px 5%;
+}
+
+main{
+padding:30px 15px;
+}
+
+h1{
+font-size:27px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<a class="logo" href="index.html">
+نبض أدوات
+</a>
+
+<a class="home" href="index.html">
+الرئيسية
+</a>
+
+</header>
+
+<main>
+
+<div class="card">
+
+<h1>📏 محول الوحدات</h1>
+
+<p class="intro">
+حوّل بين وحدات الطول والوزن والحجم ودرجة الحرارة بسهولة.
+</p>
+
+<div class="form">
+
+<div>
+<label for="category">نوع التحويل</label>
+
+<select id="category">
+
+<option value="length">الطول</option>
+<option value="weight">الوزن</option>
+<option value="volume">الحجم</option>
+<option value="temperature">درجة الحرارة</option>
+
+</select>
+</div>
+
+<div>
+<label for="value">القيمة</label>
+
+<input
+id="value"
+type="number"
+inputmode="decimal"
+placeholder="أدخل القيمة">
+</div>
+
+<div>
+<label for="from">من</label>
+
+<select id="from"></select>
+</div>
+
+<div>
+<label for="to">إلى</label>
+
+<select id="to"></select>
+</div>
+
+<button id="convert">
+تحويل
+</button>
+
+</div>
+
+<div class="result">
+
+النتيجة:
+
+<strong id="result">0</strong>
+
+</div>
+
+<div class="buttons">
+
+<button id="clear" class="secondary">
+مسح
+</button>
+
+<button id="copy">
+نسخ النتيجة
+</button>
+
+</div>
+
+<p class="message" id="message"></p>
+
+</div>
+
+<div class="card">
+
+<h2>عن محول الوحدات</h2>
+
+<p>
+يمكنك استخدام الأداة لتحويل القيم بين أشهر وحدات الطول والوزن والحجم ودرجة الحرارة.
+</p>
+
+<p>
+الأداة تعمل مباشرة داخل المتصفح ولا تحتاج إلى تسجيل أو اشتراك.
+</p>
+
+</div>
+
+</main>
+
+<footer>
+
+© 2026 نبض أدوات — جميع الحقوق محفوظة
+
+</footer>
+
+<script>
+
+const category = document.getElementById("category");
+const valueInput = document.getElementById("value");
+const from = document.getElementById("from");
+const to = document.getElementById("to");
+const result = document.getElementById("result");
+const message = document.getElementById("message");
+
+const units = {
+
+length:{
+"متر":1,
+"كيلومتر":1000,
+"سنتيمتر":0.01,
+"مليمتر":0.001,
+"ميل":1609.344,
+"قدم":0.3048,
+"بوصة":0.0254
+},
+
+weight:{
+"كيلوجرام":1,
+"جرام":0.001,
+"مليجرام":0.000001,
+"طن":1000,
+"رطل":0.45359237,
+"أونصة":0.028349523125
+},
+
+volume:{
+"لتر":1,
+"مليلتر":0.001,
+"متر مكعب":1000,
+"جالون أمريكي":3.785411784,
+"كوب":0.2365882365
+},
+
+temperature:{
+"مئوية":"C",
+"فهرنهايت":"F",
+"كلفن":"K"
+}
+
+};
+
+function updateUnits(){
+
+const selected = category.value;
+
+from.innerHTML="";
+to.innerHTML="";
+
+Object.keys(units[selected]).forEach(function(unit){
+
+const option1 = document.createElement("option");
+option1.value = unit;
+option1.textContent = unit;
+
+const option2 = document.createElement("option");
+option2.value = unit;
+option2.textContent = unit;
+
+from.appendChild(option1);
+to.appendChild(option2);
+
+});
+
+if(to.options.length > 1){
+to.selectedIndex = 1;
+}
+
+result.textContent="0";
+message.textContent="";
+
+}
+
+function convertTemperature(value,fromUnit,toUnit){
+
+let celsius;
+
+if(fromUnit === "C"){
+celsius = value;
+}
+
+else if(fromUnit === "F"){
+celsius = (value - 32) * 5 / 9;
+}
+
+else{
+celsius = value - 273.15;
+}
+
+if(toUnit === "C"){
+return celsius;
+}
+
+if(toUnit === "F"){
+return (celsius * 9 / 5) + 32;
+}
+
+return celsius + 273.15;
+
+}
+
+function convert(){
+
+const value = parseFloat(valueInput.value);
+
+if(isNaN(value)){
+
+message.textContent="أدخل قيمة للتحويل أولًا.";
+return;
+
+}
+
+const selected = category.value;
+
+const fromUnit = from.value;
+const toUnit = to.value;
+
+let converted;
+
+if(selected === "temperature"){
+
+converted = convertTemperature(
+value,
+units[selected][fromUnit],
+units[selected][toUnit]
+);
+
+}else{
+
+const baseValue =
+value * units[selected][fromUnit];
+
+converted =
+baseValue / units[selected][toUnit];
+
+}
+
+result.textContent =
+converted.toLocaleString("ar-SA",{
+maximumFractionDigits:8
+});
+
+message.textContent="تم التحويل بنجاح.";
+
+}
+
+category.addEventListener("change",updateUnits);
+
+document.getElementById("convert")
+.addEventListener("click",convert);
+
+document.getElementById("clear")
+.addEventListener("click",function(){
+
+valueInput.value="";
+result.textContent="0";
+message.textContent="";
+
+});
+
+document.getElementById("copy")
+.addEventListener("click",async function(){
+
+const value=result.textContent;
+
+if(value === "0"){
+
+message.textContent="نفّذ التحويل أولًا.";
+return;
+
+}
+
+try{
+
+await navigator.clipboard.writeText(value);
+
+message.textContent="تم نسخ النتيجة.";
+
+}catch(error){
+
+const temporary=document.createElement("textarea");
+
+temporary.value=value;
+
+document.body.appendChild(temporary);
+
+temporary.select();
+
+document.execCommand("copy");
+
+temporary.remove();
+
+message.textContent="تم نسخ النتيجة.";
+
+}
+
+});
+
+updateUnits();
+
+</script>
+
+</body>
+</html>
